@@ -26,43 +26,73 @@ body {
 }
 
 h1, h2, h3, p { font-family: 'Noto Serif Devanagari', serif; }
-      {/* 1. Welcome Overlay / Invitation Card */}
-      <div 
-        className={`fixed inset-0 z-[9999] bg-[#6b0f1a] flex items-center justify-center p-5 transition-transform duration-1000 ease-in-out ${isOpen ? '-translate-y-full' : 'translate-y-0'}`}
-      >
-        <div className="bg-[#fdf6ec] max-w-lg w-full p-8 rounded-lg border-[10px] border-double border-[#c9a227] shadow-2xl text-center relative overflow-hidden">
-          {/* Decorative Mandala Background */}
-          <div className="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center">
-            <svg viewBox="0 0 100 100" className="w-64 animate-spin-slow fill-[#6b0f1a]">
-                <path d="M50 0 L55 35 L90 25 L65 50 L90 75 L55 65 L50 100 L45 65 L10 75 L35 50 L10 25 L45 35 Z" />
-            </svg>
-          </div>
+      /* Specific Styles for the Image-Style Overlay */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--maroon);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: transform 0.8s ease-in-out;
+  padding: 20px;
+}
 
-          <div className="relative z-10">
-            <div className="text-[#6b0f1a] text-4xl mb-2">ॐ</div>
-            <h2 className="text-[#6b0f1a] text-2xl font-bold mb-4">श्री गणेशाय नम:</h2>
+.invitation-outer-card {
+  background: var(--cream);
+  max-width: 450px;
+  width: 100%;
+  padding: 40px 20px;
+  border: 10px double var(--gold);
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.shloka-text {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--maroon);
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding: 15px 0;
+  margin: 20px 0;
+  line-height: 1.6;
+}
+
+.couple-names-highlight {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--maroon);
+  margin: 15px 0;
+}
+
+.enter-btn {
+  background: var(--maroon);
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 12px 35px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.enter-btn:hover {
+  background: var(--gold);
+  color: var(--maroon);
+}
+
+       
             
-            <div className="border-y border-[#c9a227] py-4 my-4 text-sm leading-relaxed text-[#6b0f1a] italic">
-              मंगलम भगवान बिष्णु: मंगलम गरुणधोजह<br />
-              मंगलम पुण्डरीकाक्षय: मंगलाय तनोहरी ॥
-            </div>
-
-            <div className="mb-8 leading-relaxed text-[#6b0f1a]">
-              <p className="mb-2">मंगलमय शुभ घडीमा, बज्दैछन् शहनाईका स्वर,</p>
-              <p>प्रेमको पावन बन्धनमा बाँधिँदैछन्</p>
-              <div className="text-3xl font-bold my-4 drop-shadow-sm">नयना ❤️ सौगात</div>
-              <p>हाम्रो निमन्त्रणा स्वीकार्नुहोस्!</p>
-            </div>
-
-            <button 
-              onClick={handleOpen}
-              className="bg-[#6b0f1a] text-[#c9a227] px-8 py-3 rounded-full font-bold text-lg hover:bg-[#c9a227] hover:text-[#6b0f1a] transition-all duration-300 shadow-xl border border-[#c9a227]"
-            >
-              Open Invitation
-            </button>
-          </div>
-        </div>
-      </div>
+        
 
 
 
@@ -172,32 +202,30 @@ section { padding: 80px 20px; text-align: center; }
 </audio>
 
 <div id="overlay">
-  <img src="Ganesh.png" style="width: 80px;" alt="Ganesh">
-<div class="invitation-card">
-    <div class="ganesh-icon">ॐ</div>
+  <div class="invitation-outer-card">
+    <div style="font-size: 3rem; color: var(--maroon); margin-bottom: 10px;">ॐ</div>
     
-    <h2>श्री गणेशाय नम:</h2>
-    
-    <div class="shloka">
-        मंगलम भगवान बिष्णु: मंगलम गरुणधोजह<br>
-        मंगलम पुण्डरीकाक्षय: मंगलाय तनोहरी<br>॥<br>
+    <h2 style="color: var(--maroon); font-size: 1.8rem; margin-bottom: 10px;">श्री गणेशाय नम:</h2>
+
+    <div class="shloka-text">
+      मंगलम भगवान बिष्णु: मंगलम गरुणधोजह<br>
+      मंगलम पुण्डरीकाक्षय: मंगलाय तनोहरी ॥
     </div>
 
-    <div class="content">
-        मंगलमय शुभ घडीमा, बज्दैछन् शहनाईका स्वर,<br>
-        प्रेमको पावन बन्धनमा बाँधिँदैछन्<br>
-        नयना र सौगात<br>
-        सुन्दर!<br>
+    <div style="color: var(--maroon); font-size: 1.1rem; line-height: 1.8;">
+      <p>मंगलमय शुभ घडीमा, बज्दैछन्</p>
+      <p>शहनाईका स्वर,</p>
+      <p>प्रेमको पावन बन्धनमा बाँधिँदैछन्</p>
+      
+      <div class="couple-names-highlight">
+        नयना ❤️ सौगात
+      </div>
+      
+      <p>हाम्रो निमन्त्रणा स्वीकार्नुहोस्!</p>
     </div>
 
-    <div class="footer-decoration">
-        🌹✨🌹<br><br>
-    </div>
-</div>
-
-  <h2 style="margin-top:20px;">नयना ❤️ सौगात</h2>
-  <p style="color: white; letter-spacing: 2px;">विवाह निमन्त्रणा स्वीकार्नुहोस्</p>
-  <button class="enter-btn" onclick="startInvitation()">Open Invitation</button>
+    <button class="enter-btn" onclick="startInvitation()">Open Invitation</button>
+  </div>
 </div>
 
 <div id="mainContent">
