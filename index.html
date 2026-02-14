@@ -493,27 +493,47 @@ setInterval(() => {
 })();
 
 //RSVP//
-  fetch("https://script.google.com/macros/s/AKfycbyVScow7NC3RXiwPiE82qwVRekBX8Trqg7HkuSMLTbR75HtcYsRs84sm1Qey_9lkIQgcA/exec", {
-  method: "POST",
-  mode: "cors",                    // explicitly allow cross-origin (Google Apps Script needs this)
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(data)
-})
-.then(response => {
-  if (!response.ok) {
-    throw new Error(`Server error: ${response.status} ${response.statusText}`);
+  document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("rsvpForm");
+  
+  if (!form) {
+    console.error("RSVP form not found!");
+    return;
   }
-  return response.json();
-})
-.then(result => {
-  console.log("Success:", result);
-  // your success logic here (alert, reset form, etc.)
-})
-.catch(error => {
-  console.error("Fetch failed:", error);
-  alert("Submission failed: " + error.message);
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const data = {
+      name: form.name.value.trim(),
+      attending: form.attending.value.trim()
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbz0J33F6h_Ssy8NQ9xgmZ9b5T8kRrsn32hV8maWtBQQASAY1iCSGI3ipffaLO5jD67cmQ/exec", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .then(res => {
+      if (res.result === "success") {
+        alert("RSVP submitted successfully! 🙏");
+        form.reset();
+      } else {
+        alert("Server said: " + (res.error || "unknown"));
+      }
+    })
+    .catch(err => {
+      console.error("RSVP error:", err);
+      alert("Something went wrong: " + err.message);
+    });
+    // NO .finally() or button disable anymore — user can click multiple times
+  });
 });
 
 </script>
