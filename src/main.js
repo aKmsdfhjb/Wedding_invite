@@ -78,5 +78,32 @@ setInterval(() => {
   }, 500);
 
 })();
+//RSVP//
+  document.getElementById("rsvpForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const form = e.target;
+  const data = {
+    name: form.name.value,
+    attending: form.attending.value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbz0J33F6h_Ssy8NQ9xgmZ9b5T8kRrsn32hV8maWtBQQASAY1iCSGI3ipffaLO5jD67cmQ/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.json())
+  .then(res => {
+    if(res.result === "success") {
+      alert("RSVP submitted successfully! 🙏");
+      form.reset();
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Something went wrong. Please try again.");
+  });
+});
 
 </script>
