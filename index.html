@@ -493,32 +493,28 @@ setInterval(() => {
 })();
 
 //RSVP//
-  document.getElementById("rsvpForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const form = e.target;
-  const data = {
-    name: form.name.value,
-    attending: form.attending.value
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbz0J33F6h_Ssy8NQ9xgmZ9b5T8kRrsn32hV8maWtBQQASAY1iCSGI3ipffaLO5jD67cmQ/exec", {
-    method: "POST",
-    body: fd}
-  })
-  .then(res => res.json())
-  .then(res => {
-    if(res.result === "success") {
-      alert("RSVP submitted successfully! 🙏");
-      form.reset();
-    }
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Something went wrong. Please try again.");
-  });
+  fetch("https://script.google.com/macros/s/AKfycbyVScow7NC3RXiwPiE82qwVRekBX8Trqg7HkuSMLTbR75HtcYsRs84sm1Qey_9lkIQgcA/exec", {
+  method: "POST",
+  mode: "cors",                    // explicitly allow cross-origin (Google Apps Script needs this)
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error(`Server error: ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+})
+.then(result => {
+  console.log("Success:", result);
+  // your success logic here (alert, reset form, etc.)
+})
+.catch(error => {
+  console.error("Fetch failed:", error);
+  alert("Submission failed: " + error.message);
 });
-
 
 </script>
 
