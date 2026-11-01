@@ -48,3 +48,11 @@ Update the invitation text and event details in index.html. Replace images only 
 ## License and privacy
 
 Confirm permission for all photographs, music and decorative assets before public redistribution.
+
+
+## Project Wiki
+
+- [Wiki home](docs/wiki/Home.md)
+- [Architecture and deployment](docs/wiki/Architecture.md)
+
+The repository keeps a version-controlled wiki source under `docs/wiki/`.
