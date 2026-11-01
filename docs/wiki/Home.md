@@ -9,7 +9,7 @@ Open `index.html` in a modern browser. Keep image and audio assets at their expe
 ## Key repository references
 
 - [Source repository](https://github.com/aKmsdfhjb/Wedding_invite)
-- [README](../../README.md)
+- [README](https://github.com/aKmsdfhjb/Wedding_invite#readme)
 - [Architecture](Architecture.md)
 
 ## Scope and limitations
